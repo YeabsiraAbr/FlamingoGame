@@ -7,8 +7,9 @@ const config: Config = {
       colors: {
         midnight: {
           900: "#050814",
-          800: "#0b1230",
-          700: "#111b40"
+          800: "#0a1628",
+          700: "#0f1f3a",
+          600: "#162847"
         },
         aqua: {
           300: "#6ff0ff",
@@ -23,11 +24,6 @@ const config: Config = {
         sun: {
           400: "#ffd36b",
           500: "#ffb347"
-        },
-        panel: {
-          900: "rgba(6, 14, 28, 0.85)",
-          800: "rgba(15, 30, 54, 0.82)",
-          700: "rgba(21, 41, 70, 0.78)"
         }
       },
       fontFamily: {
@@ -40,10 +36,10 @@ const config: Config = {
         flare: "0 0 25px rgba(255, 77, 146, 0.45)",
         glass: "0 20px 50px rgba(5, 8, 20, 0.45)"
       },
-      backgroundImage: {
-        "grid-radial": "radial-gradient(circle at 1px 1px, rgba(111, 240, 255, 0.12) 1px, transparent 0)",
-        "hero-glow": "radial-gradient(circle at top, rgba(61, 215, 240, 0.28), transparent 55%)",
-        "flare-glow": "radial-gradient(circle at 20% 20%, rgba(255, 77, 146, 0.25), transparent 45%)"
+      animation: {
+        float: "float 6s ease-in-out infinite",
+        shimmer: "shimmer 8s ease infinite",
+        pulse: "pulse 2s ease-in-out infinite"
       },
       keyframes: {
         float: {
@@ -54,10 +50,6 @@ const config: Config = {
           "0%": { backgroundPosition: "0% 50%" },
           "100%": { backgroundPosition: "100% 50%" }
         }
-      },
-      animation: {
-        float: "float 6s ease-in-out infinite",
-        shimmer: "shimmer 8s ease infinite"
       }
     }
   },

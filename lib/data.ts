@@ -1,51 +1,121 @@
-export const initialHistory = [
-  { id: "r109", multiplier: 12.48, time: "12:31" },
-  { id: "r108", multiplier: 4.02, time: "12:29" },
-  { id: "r107", multiplier: 28.6, time: "12:27" },
-  { id: "r106", multiplier: 1.62, time: "12:25" },
-  { id: "r105", multiplier: 9.74, time: "12:24" },
-  { id: "r104", multiplier: 2.43, time: "12:22" },
-  { id: "r103", multiplier: 18.11, time: "12:21" },
-  { id: "r102", multiplier: 6.39, time: "12:19" },
-  { id: "r101", multiplier: 3.08, time: "12:17" }
-];
+export interface ChatMessage {
+  id: string;
+  user: string;
+  message: string;
+  time: string;
+  isSystem?: boolean;
+}
 
-export const initialChat = [
+export interface TopBet {
+  id: string;
+  user: string;
+  stake: number;
+  multiplier: number;
+  won: boolean;
+}
+
+export interface LiveBet {
+  id: string;
+  username: string;
+  amount: number;
+  timestamp: string;
+  cashedOut?: boolean;
+  cashoutMultiplier?: number;
+}
+
+// Chat messages for the live chat
+export const initialChat: ChatMessage[] = [
   {
     id: "c1",
-    user: "SkyRider",
-    message: "That last flight was wild. Flamingo almost kissed 30x!",
+    user: "FlightMaster",
+    message: "Just hit 12x! This flamingo is on fire today 🔥",
     time: "12:31"
   },
   {
     id: "c2",
-    user: "OddsQueen",
-    message: "Auto cash-out at 3.5x saved me again.",
+    user: "LuckyBet99",
+    message: "Auto cashout at 2x is the safe play",
     time: "12:30"
   },
   {
     id: "c3",
-    user: "FlockLeader",
-    message: "Going big next round. Wings up!",
+    user: "WingRider",
+    message: "Who else saw that 28x earlier?? Insane!",
     time: "12:30"
   },
   {
     id: "c4",
-    user: "NeonPilot",
-    message: "The trail glow is so clean right now.",
+    user: "BetKing",
+    message: "Going all in next round 💰",
     time: "12:29"
   },
   {
     id: "c5",
-    user: "FlareBet",
-    message: "Anyone chasing 10x?",
+    user: "SkyHigh42",
+    message: "This game is addictive haha",
     time: "12:29"
+  },
+  {
+    id: "c6",
+    user: "CashMaster",
+    message: "Pro tip: set auto cashout and relax",
+    time: "12:28"
+  },
+  {
+    id: "c7",
+    user: "FlamingoFan",
+    message: "Love watching this bird fly!",
+    time: "12:27"
+  },
+  {
+    id: "c8",
+    user: "NightOwl",
+    message: "Finally won after 5 rounds",
+    time: "12:26"
   }
 ];
 
-export const topBets = [
-  { id: "b1", user: "Azure", stake: 48, multiplier: 14.2 },
-  { id: "b2", user: "Nova", stake: 36, multiplier: 9.3 },
-  { id: "b3", user: "Orbit", stake: 22, multiplier: 18.8 },
-  { id: "b4", user: "Pulse", stake: 12, multiplier: 6.1 }
+// Top bets for leaderboard
+export const topBets: TopBet[] = [
+  { id: "b1", user: "Player***21", stake: 250, multiplier: 15.42, won: true },
+  { id: "b2", user: "Lucky***87", stake: 100, multiplier: 8.65, won: true },
+  { id: "b3", user: "Bet***45", stake: 500, multiplier: 3.21, won: true },
+  { id: "b4", user: "Win***33", stake: 50, multiplier: 22.8, won: true },
+  { id: "b5", user: "Star***12", stake: 150, multiplier: 5.44, won: false },
+  { id: "b6", user: "Pro***56", stake: 75, multiplier: 12.1, won: true }
 ];
+
+// Generate random username display
+export function generateUsername(): string {
+  const prefixes = ["Player", "Lucky", "Bet", "Win", "Star", "Pro", "Ace", "King", "Max", "Nova"];
+  const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+  const suffix = Math.floor(Math.random() * 100).toString().padStart(2, "0");
+  return `${prefix}***${suffix}`;
+}
+
+// Generate random bet amount
+export function generateBetAmount(): number {
+  const amounts = [5, 10, 25, 50, 100, 250, 500];
+  return amounts[Math.floor(Math.random() * amounts.length)];
+}
+
+// Format currency
+export function formatCurrency(amount: number): string {
+  return amount.toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+}
+
+// Get multiplier color class based on value
+export function getMultiplierColorClass(multiplier: number): string {
+  if (multiplier >= 10) return "history-mega";
+  if (multiplier >= 5) return "history-high";
+  if (multiplier >= 2) return "history-medium";
+  return "history-low";
+}
+
+// Format time for display
+export function formatTime(date: Date = new Date()): string {
+  return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+}
